@@ -478,13 +478,7 @@ This gives us a full toolchain to be able to carry out our Web Data Integration.
 
 == WDI In Practice
 
-Let's break down what a WDI project looks like:
-
-1. Problem statement
-1. Data source identification
-1. Schema definition
-1. Query definition
-1. Data source mapping
+Let's break down what a WDI project looks like in practice.
 
 === Problem statement
 
@@ -492,7 +486,9 @@ Start off with a problem statement: what question(s) are you trying to answer us
 
 === Data source identification
 
-You should now be able to determine where you want to get this data from. This is sometimes driven by business requirements (competitors), and sometimes by technical considerations. 
+You should now be able to determine where you want to get this data from, and how often. This is sometimes driven by business requirements (competitors), and sometimes by technical considerations.
+
+This step is also a sanity check for whether or not the data is available, and if it is going to be feasible to collect the data as desired.
 
 === Schema definition
 
@@ -502,27 +498,85 @@ You must now define the schema that you want to end up with. To do this, you nee
 1. YAML is easier to write
 1. YAML can be commented
 
+You should only use a subset of JSON Schema - you only want database friendly types, so no polymorphism! Think of the JSON schema as really representing nested tables. As such it is important to be able to identify a primary key that you can use for the data, be that a URL, a SKU, or otherwise.
+
 The schema should really be driven from the business problem you are trying to collect data to answer, but potentially with an eye on what the next question might be. It's not possible to go back and collect histroic data, so it's better to try to get the coverage of data you think you will need for the project. It is a bit waterfall by necessity, however you can still be lean and go back and add and change fields. However once you start collecting data the cost of change becomes much higher.
 
 === Query definition
 
-Now you have your schema defined, you should be able to write down the SQL queries you would execute in order to get the answers you want. This really is a vlidation exercise to check that the schema is correct, and once you start pressing forward you will be able to answer the questions with the data you have.
+Now you have your schema defined, you should be able to write down the SQL queries you would execute in order to get the answers you want. This really is a validation exercise to check that the schema is correct, and once you start pressing forward you will be able to answer the questions with the data you have.
 
 === Data source mapping
 
-Now you have the data sources and the schema, you should be able to map the schema to the data points that are on the data sources.
+Now you have the data sources and the schema, you should be able to map the schema to the data points to the data sources, ready for the Data Engineering. This really is the "specification" step of the software development lifecycle (SDLC) of Data Engineering.
+
+=== Data engineering
+
+Data engineering is the process of creating the code or configuration to fetch the web resources, and transform them into JSON adhering to the schema required.
+
+The output of this step is newline-delimited JSON ("ND-JSON").
+
+==== Data transformation
+
+As part of the data engineering, any transformations that are necessary to make the data fit into the desired schema must be carried out; for example, this may include currency normalization, case normalization, date parsing, field splitting (`name => first_name, last_name`).
+
+==== Audit trail
+
+It is often the case that we want to keep an audit log of where the data came from for traceability reasons. These may include raw files, e.g. HTML, as well as screenshots from Web Applications.
+
+==== Data quality checking
+
+An integral part of Data Engineering is Data Quality checking, which should ideally be happening progressively as the data is collected, so as to raise an issue to ops, and then fail fast if there is an issue that needs correcting. If this is not possible, it can be checked at the end, but if there are issues with certain data, the data may need to be re-fetched. For this reason it is best to keep the raw data file, e.g. HTML, such that if possible data can be re-extracted without 
+
+===== Schema validation
+
+The data can be validated against the schema as it is collected. The JSON Schema can contain rules for what the data should be, e.g. min/max values, regular expressions, etc. Later, values in the Data lake conversion process will blanked if they do not conform to the schema, so this can give an example of data loss.
+
+===== Model-based validation
+
+The data can also be validated against a machine learning model to see if it has the same "shape" as previous, known-valid data. Data that is incorrectly flagged can be used for further training of the model.
+
+=== Data import
+
+Data can then be canverted into parquet file(s) and stored in the data lake in the correct partition(s). These file(s) should have predictable fienames so that if they need to be deleted or replaced in future they can be.
+
+=== Data analysis, visualization and alerting
+
+Once the data is stored, then the queries can be run against it, dashboards created, and alerts set up to notify you of certain conditions occuring.
+
+== Identity resolution
+
+Let's take the example of comparing a list of products from one store to  products across several other stores. It may be that the products we are wanting to match are the corresponding white-label product. Each store has their own product identifier (SKU), and effectively we need to maintain a link between these SKUs. Furthermore, we want to only collect data for the products that we are interested in, rather than the entire product catalogue of every shop.
+
+As such, this is a secondary WDI process, which seems to produce two artifacts:
+
+* a list of URLs for each store of products to collect data on;
+* a table of matches of products that should be compared against each other.
+
+However, this list may change over time, but we want the match at the time of collection to be properly historically linked to the product. Rather than creating a time series of product matches which would be very costly to join against at query-time, we can simply pass through the SKU for the master product along with the URL of the product it is matched against, and have that as a field within the output schema.
+
+So therefore it produces a single artifact:
+
+* a list of (URL, master SKU) for each store of products to collect data on.
+
+Clearly, this is a stateful and incremental process which may take human input, in contrast to collecting the web data. As such this data needs to be held in a different database, and this database needs to be queried to get the inputs by the Data Engineering process.
+
+The central theme here though is that it is much better to work out _ahead of time_ the identity relative to a master list of entities where possible. It is possible to do the matching dynamically as part of the Data Engineering process, but even in this case the identity linking should ideally be inlined in the Data Lake files. This does mean that the data links cannot be changed historically without more processing.
+
+=== Matching algorithms
+
+This is all well and good, but it sidesteps one of the questions: how do you actually resolve which product matches to which product? This varies depending on what data you have to match against. In the one case, you may have two or more complete data dumps, and there is no "master" list of entities to match against. In the other case, you may have a complete "master" list of entities, and it may not be feasible to pull down the whole database(s) to match again, and as such you may need to work out how to pull down what you think should be a covering set of data to match your "master" list against.
+
+There are a whole plethora of techniques from Data Integration you can investigate to try to resolve which entities match up across data sources which are outside the scope of this document.
+
+== Data Fusion
+
+Normally, the creating of composite data from multiple websites can be slightly out of the scope of WDI, identity resolution being enough. However, given that in our model all of the data from different websites has a consistent schema, we can go ahead, should we wish, and try to create composite data about, for example, a Product and the offers for sale it has.
+
+Part of this is creating a good understanding of how to score different sources of data for quality for conflict resolution, or how to score different values. This may be based upon, for example, how trusted the website source is. 
+
+This is then a standard Data Integration problem as to how to merge the records together, which is outside the scope of this document.
 
 
-
-== The Data Integration Process
-
-1. Data mapping
-1. Schema mapping
-1. Data collection
-1. Data QA (during collection)
-1. Data translation
-1. Identity resolution
-1. Data fusion
-1. Data QA 2
 
 TODO: Bing Liu - Wrapper induction using ML techniques
