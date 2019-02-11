@@ -1,0 +1,26 @@
+{
+  "name": "wdi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "antora antora-playbook.yml",
+    "serve": "serve build/site",
+    "publish": "touch build/site/.nojekyll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjgp2/wdi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjgp2/wdi/issues"
+  },
+  "homepage": "https://github.com/mjgp2/wdi#readme",
+  "devDependencies": {
+    "@antora/cli": "^2.0.0",
+    "@antora/site-generator-default": "^2.0.0",
+    "serve": "^6.5.8"
+  }
+}
