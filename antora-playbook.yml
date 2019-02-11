@@ -1,5 +1,6 @@
 site:
   title: Web Data Integration
+  url: https://webdataintegration.info/
 content:
   sources:
   - url: https://github.com/mjgp2/wdi.git
