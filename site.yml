@@ -1,6 +1,12 @@
 site:
   title: Web Data Integration
   url: https://webdataintegration.info/
+  start_page: wdi::index.adoc
+content:
+  sources:
+  - url: ./
+    branches: HEAD
+    start_path: articles
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable

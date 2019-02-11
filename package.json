@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "antora antora-playbook.yml",
+    "build": "rm -rf .cache; antora --cache-dir .cache site.yml",
     "serve": "serve build/site",
     "publish": "touch build/site/.nojekyll"
   },
