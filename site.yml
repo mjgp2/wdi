@@ -4,7 +4,7 @@ site:
   start_page: wdi::index.adoc
 content:
   sources:
-  - url: ./
+  - url: .
     branches: HEAD
     start_path: articles
 ui:
