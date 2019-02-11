@@ -1,4 +1,4 @@
-== Identity resolution
+= Identity resolution
 
 Let's take the example of comparing a list of products from one store to  products across several other stores. It may be that the products we are wanting to match are the corresponding white-label product. Each store has their own product identifier (SKU), and effectively we need to maintain a link between these SKUs. Furthermore, we want to only collect data for the products that we are interested in, rather than the entire product catalogue of every shop.
 
@@ -17,7 +17,7 @@ Clearly, this is a stateful and incremental process which may take human input, 
 
 The central theme here though is that it is much better to work out _ahead of time_ the identity relative to a master list of entities where possible. It is possible to do the matching dynamically as part of the Data Engineering process, but even in this case the identity linking should ideally be inlined in the Data Lake files. This does mean that the data links cannot be changed historically without more processing.
 
-=== Matching algorithms
+== Matching algorithms
 
 This is all well and good, but it sidesteps one of the questions: how do you actually resolve which product matches to which product? This varies depending on what data you have to match against. In the one case, you may have two or more complete data dumps, and there is no "master" list of entities to match against. In the other case, you may have a complete "master" list of entities, and it may not be feasible to pull down the whole database(s) to match again, and as such you may need to work out how to pull down what you think should be a covering set of data to match your "master" list against.
 

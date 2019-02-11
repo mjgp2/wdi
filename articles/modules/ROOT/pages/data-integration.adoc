@@ -1,4 +1,4 @@
-== Data Integration
+= Data Integration
 
 One definition that follows for data integration is that:
 
@@ -6,7 +6,7 @@ One definition that follows for data integration is that:
 
 It is, in effect, offering the fragmented data up as if it were a single database for query.
 
-=== The scale of challenge
+== The scale of challenge
 
 Data integration is a hard problem, it is "AI Complete, meaning that completely automated solutions are unlikely. The reasons for this are three-fold:
 
@@ -19,7 +19,7 @@ As it is AI Complete, we must aim for 2 goals:
 1. Reduce the effort needed to set up an integration application.
 1. Enable the system to perform gracefully with uncertainty
 
-=== Solving data integration
+== Solving data integration
 
 To break this out more, there are a number of properties that we want from the homogenous database:
 
@@ -30,7 +30,7 @@ To break this out more, there are a number of properties that we want from the h
 
 In order to achieve this, data integration needs to be able to resolve the different types of heterogenity between different data sources.
 
-== Data Source Heterogenity
+= Data Source Heterogenity
 
 There are five different types of heterogenity that we need to solve for in the data:
 
@@ -42,7 +42,7 @@ There are five different types of heterogenity that we need to solve for in the 
 
 As we will see, the application of standards in each of these areas can reduce or eliminate the heterogenity in these areas.
 
-=== Access Heterogenity
+== Access Heterogenity
 
 There are many different layers to be being able to access data, and we must bridge these layers in order to consolidate our data.
 
@@ -61,7 +61,7 @@ Predefined; Canned queries, e.g. web forms/APIs,
 
 Note that although databases may hae a full language to construct any desired query on the data, in reality pre-defined indexes may be required for such.
 
-=== Encoding Heterogenity
+== Encoding Heterogenity
 
 This is the difference in the encoding of the data and meta-data. This often does not apply when using some standardised access methods, such as JDBC, where any underlying differences in how the data is encoded is factored out by the access layer. You can see that it would apply however in data dumps, for example:
 
@@ -76,7 +76,7 @@ This is the difference in the encoding of the data and meta-data. This often doe
 
 In practice, this is the easiest bridge to build between data sources due to there being good support for most different standards and charsets in most platforms and programming languages.
 
-=== Data Model Heterogenity
+== Data Model Heterogenity
 
 This is the difference in the type of Data Model that is used to represent data. This is importantly different from the schema, which describes how we model the attributes of entities, but rather this is how we model the entities themselves and the relationships between them.
 
@@ -91,7 +91,7 @@ This is the difference in the type of Data Model that is used to represent data.
 |Relational++|Row-to-Row, Inheritance, Nested|PostgreSQL: a "cell" can itself have hierarchical data stored within it, there exists table inheritance, but the relationships are modelled between rows
 |======
 
-=== Structural Heterogenity
+== Structural Heterogenity
 
 Structural heterogenity is the difference in the data structures, such as tables, used to model the same data. This can include differences in:
 
@@ -99,27 +99,27 @@ Structural heterogenity is the difference in the data structures, such as tables
 1. Normalization
 1. Nesting vs Foreign Key
 
-==== Alternative modelling
+=== Alternative modelling
 
 Consider how you capture data for dogs and cats. Do you have a dogs table and a cats table? Do you have an animals table with an `species` column? Do you have an `is_cat` column if you know it's only cats and dogs? There are many ways to model the same data.
 
-==== Nomalization
+=== Nomalization
 
 Normalization refers to the level of different tables you break things out to. For example, let's say that each person has a list of hobbies. In a RDBMS you could have a person and a hobby table, and a join table to track who has what hobbies. Alternatively, you could just put the string values in a "hobbies" array within the person row. Or you could remove the join table and track a list of ids within the person row.
 
 Higher levels of normalization are generally thought to be "cleaner" representations of data, whereas you can get better real-world performance from some denormalization due to the disk/memory access required to fetch a person and their hobbies.
 
-==== Nesting vs Foreign Key
+=== Nesting vs Foreign Key
 
 Similar to normalization, this is a question of whether the data is stored in a normalized form, or nested within.
 
 For example, let's suppose you have people and their pets. Each pet only ever has one owner. In PostgreSQL you could either have a people and pet table, or alternatively you could have a `pets` column within the person table that stored a JSON blob that contained a list of pets, their names, ages, and so on.
 
-=== Semantic Heterogenity
+== Semantic Heterogenity
 
 Semantic heterogenity is the differences in the meaning of the schema and data of the different data sources.
 
-==== Data heterogenity
+=== Data heterogenity
 
 .Data heterogenity
 [options="header"]
@@ -134,7 +134,7 @@ Semantic heterogenity is the differences in the meaning of the schema and data o
 |Date/Time|Implicit timezone
 |======
 
-==== Schematic heterogenity
+=== Schematic heterogenity
 
 .Schematic heterogenity
 [options="header"]
@@ -145,7 +145,7 @@ Semantic heterogenity is the differences in the meaning of the schema and data o
 |======
 
 
-==== Object Identity
+=== Object Identity
 
 The same item, e.g. product, is often represented in multiple data source, or sometimes even by multiple unlinked records within the same Data Source.
 
@@ -154,7 +154,7 @@ The reason that we could have duplicates in a data sources could include:
 * Human error, such as typos
 * Lack of consistent global identifier (primary key)
 
-==== Data conflicts
+=== Data conflicts
 
 Multiple data sources can have different values for the same entity attribute. This could be decause of:
 

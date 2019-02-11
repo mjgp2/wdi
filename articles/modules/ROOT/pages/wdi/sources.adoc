@@ -1,7 +1,7 @@
 
-== Sources of data on the Web
+= Sources of data on the Web
 
-=== Data catalogues and marketplaces
+== Data catalogues and marketplaces
 
 Data catalogues and marketplaces collect and host data sets and their meta-data. Access to some data may be free, and others may be paid.
 
@@ -13,7 +13,7 @@ Commercial marketplaces include https://www.factual.com/[Factual], https://www.d
 
 You can access a list of data catalogues at https://data.wu.ac.at/portalwatch[Portal Watch].
 
-=== Web Applications and Sites
+== Web Applications and Sites
 
 There are many web applications that publicly expose information, either through their HTML UI or HTTP APIs. This imformation might come in the form of:
 
@@ -26,7 +26,7 @@ The data exposed through these UIs and APIs can be collected, but it is only a s
 
 Some of the APIs may require authentication, which may place limits around usage.
 
-==== Data freedom, and the rise of protectionist behaviour
+=== Data freedom, and the rise of protectionist behaviour
 
 As companies have come to realise the value of Web Data Integration, some comapnies have taken a protectionist view on their own data and employed techniques and companies to try to limit the access of their publicly accessible data by third parties in order to try to reduce competition, or give themselves a market advantage.
 
@@ -36,7 +36,7 @@ While it is certainly the case that companies need to protect themselves against
 
 It is certainly my hope that over time these companies will come to see that gathering of publicly available data is not something you do yourself in secret, which castigating others for the same.
 
-=== The Semantic Web
+== The Semantic Web
 
 The concept of the "Semantic Web" extends the web conceptually by using HTTP URIs (URLs) to uniquely identify both entities and the types of relationships between entities.
 
@@ -46,7 +46,7 @@ SPARQL is the SQL-like query language that is standardized for querying Linked D
 
 RDF and SPARQL has a low low commercial adoption rate.
 
-=== HTML Embedded Structured Data
+== HTML Embedded Structured Data
 
 Data can be embedded in HTML pages, and while that can be very useful, it is often incomplete. As such it can form a solid source of _some_ of the data you are wishing to collect.
 
@@ -54,15 +54,15 @@ The adoption of these different formats continues to grow:
 
 image::htmldata-adoption.png[]
 
-==== Embedding mechanisms
+=== Embedding mechanisms
 
-===== RDFa
+==== RDFa
 
 RDFa was first proposed in 2004, and was recommended by W3C in 2008. Its use has been superceeded by Microdata and JSON-LD, both of which are simpler formats.
 
 image::rdfa-adoption.png[]
 
-===== Microdata
+==== Microdata
 
 Microdata is an alternative, less verbose, markup than RDFa:
 
@@ -81,7 +81,7 @@ Microdata is an alternative, less verbose, markup than RDFa:
 
 It was proposed in 2009 by the WHATWG group as part of the HTML5 specification and standardization process.
 
-===== JSON-LD
+==== JSON-LD
 
 JSON-LD is a JSON representation of linked data, which is both concise and human readable.
 
@@ -102,7 +102,7 @@ JSON-LD is a JSON representation of linked data, which is both concise and human
 </script>
 ----
 
-===== Microformats
+==== Microformats
 
 Microformats date back to 2003, and comprise a small set of fixed formats:
 
@@ -119,9 +119,9 @@ Microformats date back to 2003, and comprise a small set of fixed formats:
 
 The main problem with microformats was their lack of extensibility. They exist now, but really are deprecated, and their use has been superceeded by schema.org embedded data.
 
-==== Schemas
+=== Schemas
 
-===== Schema.org
+==== Schema.org
 
 Google, Yahoo, Bing, and Yandex all had the same problem - the fact the web is a set of unstructured HTML pages and other documents really started to hamper their ability to answer questions for their users that went beyond pointing them to a web page. To improve their customer experience, they needed better, structured data on each page that followed a consistent schema. You can see that they were trying to solve Data Integration in general for the web!
 
@@ -139,17 +139,17 @@ It is worth pointing out that companies can get so large they are seemingly immu
 
 image::schema.org-adoption.png[]
 
-===== OpenGraph
+==== OpenGraph
 
 http://ogp.me/[OpenGraph] is a proprietary Facebook schema and embeddeding mechanism based on RDFa that allows companies to define how their pages look when consumed within Facebook. Facebook rolled it out in 2010.
 
-==== Adoption
+=== Adoption
 
 As of 2017, approximately 38% of HTML pages had embedded structured data, and approximately 28% of domains have embedded data. Clearly there is a lot of structured data already available on the web.
 
 Over 5 million sites had already embedded schema.org data in 2014.
 
-=== Common Crawl
+== Common Crawl
 
 The http://commoncrawl.org/[Common Crawl] project crawls approximately 3 billion HTML pages every year. Many web sites have a selection of pages, but the aim is not to crawl any site completely. 
 
@@ -159,7 +159,7 @@ image::webdatacommons.png[]
 
 Web Data Commons is a very good way of getting some representative data where you need a sample across many sites, or for a particular entity type, but should not be considered for deep collection purposes due to its incompleteness.
 
-=== HTML Tables
+== HTML Tables
 
 There are hundreds of millions of high quality HTML data tables on the web, many of which are within Wikipedia.
 
@@ -167,7 +167,7 @@ image::tables.png[]
 
 Part of the issue here is working out the schemas for the data, clearning the data, etc.
 
-==== Web Data Commons - Web Tables Corpus
+=== Web Data Commons - Web Tables Corpus
 
 The http://webdatacommons.org/webtables/index.html[Web Tables Corpus] is a large public corpus of 233 million relational Web Tables.
 
@@ -175,17 +175,17 @@ image::webtables.png[]
 
 These tables were filtered out of a 10.2 billion raw tables from Common Crawl.
 
-==== Google Table Search
+=== Google Table Search
 
 Google Tables Search is a Google Research project to make web tables searchable.
 
 image::googletables.png[]
 
-=== Wikipedia
+== Wikipedia
 
 Several projects exist to try to capture the content of Wikipedia in a structured format.
 
-==== DBpedia
+=== DBpedia
 
 DBpedia decrises over 6 million things, of which over 5 million are classified in a consistent schema using 760 classes and 2739 properties, including:
 
@@ -197,7 +197,7 @@ Altogether there are 13 billion RDF triples, of which 1.7 billion are English, 2
 
 image::dbpedia.png[]
 
-==== Wikidata
+=== Wikidata
 
 https://www.wikidata.org/[Wikidata] is a collaboratively edited knowledge base hosted by the Wikimedia Foundation. It is a common source of open data that Wikimedia projects such as Wikipedia can use, and by anyone else, under a public domain license. 
 
