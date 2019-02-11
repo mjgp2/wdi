@@ -1,0 +1,69 @@
+
+== WDI In Practice
+
+Let's break down what a WDI project looks like in practice.
+
+=== Problem statement
+
+Start off with a problem statement: what question(s) are you trying to answer using data? WDI is a business driven activity, there should be a clear value proposition from the project. Of course, you won't know all the questions at the start, but you should try to define enough questions to validate that you are collecting the correct data.
+
+=== Data source identification
+
+You should now be able to determine where you want to get this data from, and how often. This is sometimes driven by business requirements (competitors), and sometimes by technical considerations.
+
+This step is also a sanity check for whether or not the data is available, and if it is going to be feasible to collect the data as desired.
+
+=== Schema definition
+
+You must now define the schema that you want to end up with. To do this, you need to write the JSON schema required, although personally I prefer to write it in YAML and then compile it to JSON, because:
+
+1. YAML is easier to read
+1. YAML is easier to write
+1. YAML can be commented
+
+You should only use a subset of JSON Schema - you only want database friendly types, so no polymorphism! Think of the JSON schema as really representing nested tables. As such it is important to be able to identify a primary key that you can use for the data, be that a URL, a SKU, or otherwise.
+
+The schema should really be driven from the business problem you are trying to collect data to answer, but potentially with an eye on what the next question might be. It's not possible to go back and collect histroic data, so it's better to try to get the coverage of data you think you will need for the project. It is a bit waterfall by necessity, however you can still be lean and go back and add and change fields. However once you start collecting data the cost of change becomes much higher.
+
+=== Query definition
+
+Now you have your schema defined, you should be able to write down the SQL queries you would execute in order to get the answers you want. This really is a validation exercise to check that the schema is correct, and once you start pressing forward you will be able to answer the questions with the data you have.
+
+=== Data source mapping
+
+Now you have the data sources and the schema, you should be able to map the schema to the data points to the data sources, ready for the Data Engineering. This really is the "specification" step of the software development lifecycle (SDLC) of Data Engineering.
+
+=== Data engineering
+
+Data engineering is the process of creating the code or configuration to fetch the web resources, and transform them into JSON adhering to the schema required.
+
+The output of this step is newline-delimited JSON ("ND-JSON").
+
+==== Data transformation
+
+As part of the data engineering, any transformations that are necessary to make the data fit into the desired schema must be carried out; for example, this may include currency normalization, case normalization, date parsing, field splitting (`name => first_name, last_name`).
+
+==== Audit trail
+
+It is often the case that we want to keep an audit log of where the data came from for traceability reasons. These may include raw files, e.g. HTML, as well as screenshots from Web Applications.
+
+==== Data quality checking
+
+An integral part of Data Engineering is Data Quality checking, which should ideally be happening progressively as the data is collected, so as to raise an issue to ops, and then fail fast if there is an issue that needs correcting. If this is not possible, it can be checked at the end, but if there are issues with certain data, the data may need to be re-fetched. For this reason it is best to keep the raw data file, e.g. HTML, such that if possible data can be re-extracted without 
+
+===== Schema validation
+
+The data can be validated against the schema as it is collected. The JSON Schema can contain rules for what the data should be, e.g. min/max values, regular expressions, etc. Later, values in the Data lake conversion process will blanked if they do not conform to the schema, so this can give an example of data loss.
+
+===== Model-based validation
+
+The data can also be validated against a machine learning model to see if it has the same "shape" as previous, known-valid data. Data that is incorrectly flagged can be used for further training of the model.
+
+=== Data import
+
+Data can then be canverted into parquet file(s) and stored in the data lake in the correct partition(s). These file(s) should have predictable fienames so that if they need to be deleted or replaced in future they can be.
+
+=== Data analysis, visualization and alerting
+
+Once the data is stored, then the queries can be run against it, dashboards created, and alerts set up to notify you of certain conditions occuring.
+

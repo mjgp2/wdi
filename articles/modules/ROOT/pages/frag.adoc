@@ -1,0 +1,23 @@
+= Data Fragmentation
+
+Databases and the analytics tools that sit on top of them allow us to get answers to business questions based on a huge amount of data, which is hugely valuable. However, for this to be feasible there are three key assumptions:
+
+1. the data is all in a single schema;
+1. the data doesn't contain duplicate records;
+1. the data is up to date and has no conflicts or quality issues.
+
+In reality though, this is not often the case, and the data that needs to be analysed has to come from multiple sources where the databases have been created entirely independently, and there is little to no opportunity to homogenise these data sources for either technical or commercial reasons. In effect you have a collection of data silos.
+
+image::silos.png[]
+
+These different data silos can:
+
+1. use different data models;
+1. use diferent schemas;
+1. describe the same entity;
+1. have conflicting data about the same entity;
+1. have different query interfaces and languages to access the data.
+
+This happens across many industries. In banks it can be mainly internal data - both from having acquired other businesses, and from seperate IT initatives that created data silos. In Professional Services companies, it tended to be mostly external, needing to leverage many external data sources that are heterogeneous in a consistant way in order to do research.
+
+Data Integration attempts to find solutions to this real-world problem of silos and fragmentation.

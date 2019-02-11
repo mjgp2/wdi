@@ -1,0 +1,33 @@
+== Knowledge graphs
+
+A knowledge graph is a large cross-doman knowledge base which aims to cover all entities in the world. They tend to be proprietary and based upon RDF technology. 
+
+They are great examples of large-scale Web Data Integration as they combine data from many of the sources into a single database:
+
+1. Wikipedia
+2. Open license data
+** CIA World Factbook
+** MusicBrainz
+3. Purchased Data
+4. HTML Embedded Structured Data
+
+A very large amount of effort is spent on data integration and manual curation of data.
+
+=== Google Knowledge Graph
+
+Google acquired Freebase in 20??, that attempted to be an open Knowledge Graph. Google then started developement of the Google Knowledge Graph based upon this in 2012. As of 2012 there are 570 million objects described by over 18 billion triples, with 1,500 classes and 35,000 properties in the taxonomy.
+
+When you are searching, Google leverages this Knowledge graph to provide you structured data as part of your results, so you don't have to leave their application to get your answers, both by giving you supplemental data visually and also by directly using the facts to answer questions such as "compare the Eiffel Tower and the Empire State Building".
+
+
+image::google.png[]
+
+Due to this, content optimisation for companies of other web data, such as the company Wikipedia entry, becomes more important.
+
+Behind the scenes Google's Hummingbird algorithm (2013) uses knowledge graph for weights in ranking its search results also.
+
+=== Microsoft Satori Knowledge Base
+
+This was revealed to the public in 2013, and powers parts of Bing.
+
+image::bing.png[]

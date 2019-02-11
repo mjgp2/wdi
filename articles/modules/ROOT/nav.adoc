@@ -1,1 +1,11 @@
-* xref:index.adoc[Welcome]
+* xref:index.adoc[Introduction]
+* xref:frag.adoc[Data Fragmentation]
+* xref:data-integration.adoc[Data Integration]
+* xref:wdi/index.adoc[Web Data Integration]
+** xref:wdi/sources.adoc[Sources of Web Data]
+** xref:wdi/di-arch.adoc[Data Integration Architecture]
+** xref:wdi/in-practice.adoc[In Practice]
+*** xref:wdi/identity.adoc[Identity Resolution]
+*** xref:wdi/fusion.adoc[Data Fusion]
+** Case Studies
+*** xref:wdi/case-study/knowledge-graphs.adoc[Knowledge Graphs]

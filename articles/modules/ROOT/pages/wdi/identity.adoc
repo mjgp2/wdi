@@ -1,0 +1,24 @@
+== Identity resolution
+
+Let's take the example of comparing a list of products from one store to  products across several other stores. It may be that the products we are wanting to match are the corresponding white-label product. Each store has their own product identifier (SKU), and effectively we need to maintain a link between these SKUs. Furthermore, we want to only collect data for the products that we are interested in, rather than the entire product catalogue of every shop.
+
+As such, this is a secondary WDI process, which seems to produce two artifacts:
+
+* a list of URLs for each store of products to collect data on;
+* a table of matches of products that should be compared against each other.
+
+However, this list may change over time, but we want the match at the time of collection to be properly historically linked to the product. Rather than creating a time series of product matches which would be very costly to join against at query-time, we can simply pass through the SKU for the master product along with the URL of the product it is matched against, and have that as a field within the output schema.
+
+So therefore it produces a single artifact:
+
+* a list of (URL, master SKU) for each store of products to collect data on.
+
+Clearly, this is a stateful and incremental process which may take human input, in contrast to collecting the web data. As such this data needs to be held in a different database, and this database needs to be queried to get the inputs by the Data Engineering process.
+
+The central theme here though is that it is much better to work out _ahead of time_ the identity relative to a master list of entities where possible. It is possible to do the matching dynamically as part of the Data Engineering process, but even in this case the identity linking should ideally be inlined in the Data Lake files. This does mean that the data links cannot be changed historically without more processing.
+
+=== Matching algorithms
+
+This is all well and good, but it sidesteps one of the questions: how do you actually resolve which product matches to which product? This varies depending on what data you have to match against. In the one case, you may have two or more complete data dumps, and there is no "master" list of entities to match against. In the other case, you may have a complete "master" list of entities, and it may not be feasible to pull down the whole database(s) to match again, and as such you may need to work out how to pull down what you think should be a covering set of data to match your "master" list against.
+
+There are a whole plethora of techniques from Data Integration you can investigate to try to resolve which entities match up across data sources which are outside the scope of this document.

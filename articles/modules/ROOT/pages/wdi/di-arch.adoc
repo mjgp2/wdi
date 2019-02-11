@@ -1,0 +1,73 @@
+
+== Data Integration Architecture
+
+There are two extremes of integration model in Data Integration - Materialized where you consolidate the data into a database, and Virtual when you leave the data in its data stores, but provide a translation layer on top.
+
+image::material-virtual.png[]
+
+image::material-virtual-2.png[]
+
+Therefore, when talking about web data, it really only makes sense to pull the data into a database, because the API access methods are so restrictive that you will not be able to carry out the analytics you require on the data. The Virtual architecture is really only useful if you cannot realistically pull all of the required data into the same place with an acceptable latency - for example, using the Bing web search API.
+
+So, now we know that we need a database to consolidate the data into, let's look at some of our options.
+
+=== Databases
+
+==== RDF stores
+
+RDF stores have incredibly low adoption in the wider technical community, and I could not recommend using one unless you have either the budget or the people to take MarkLogic to production, or you are happy to try to use Apache Jena.
+
+image::rdf-adoption.png[]
+
+==== OLTP Databases
+
+Relational OLTP databases organise the data on disk in rows. This makes it very efficient to be able to read and write the values generally in a single row, but it becomes much more expensive to be able to carry out analytics on a particular column. To overcome this, you can use covering indexes such that for a particular query only the data from the B-Tree index has to be read, which is much more efficient. However, this requires knowing all of the data access patterns up front, and also takes more space as the data is stored twice. This, you can imagine, is problematic for situations where the team who is creating the queries do not want to be having to wait for indexes to be created.
+
+It's for this reason that generally relational databases are not recommended for general analytical workloads.
+
+==== Document stores
+
+Similarly document stores tend to have to parse the full object in JSON/BSON order to carry out analysis, unless the object is indexed. This has the same issues as relational databases for ad-doc analytical queries.
+
+==== Search engines
+
+The main example here is Lucene, and those engines that use it the build search clusters such as Elastic Search or Solr. These systems can give very good latency of results, but generally can be hard to scale the indexes up to support many entity types.
+
+With this model, the storage capacity is directly linked to each node in the cluster, as it the CPU and memory - that is, the CPU, memory and storage are all tightly coupled together. This makes indexes very difficult to scale, as you cannot elastically scale the throughput independently of the storage: you will need to physically add more disks to a node, or more RAM/CPUs.
+
+==== OLAP Databases
+
+OLAP databases are gnerally columnar databases or search indexes that tend to store the data in pages - groups of rows - on disk, where the pages are partitioned by some (composite) key, such that if, for example, you want to get all the events in a specific time window, the corresponding data pages to check can be located, hence reducing the amount of data to be scanned. Within each page, the data is stored in rows, and may be encoded in a way that makes the bytes that need to be scanned again decrease, e.g. a byte dictionary may be used for string enum values. Therefore in order to calculate an aggregate on a column, it is reading contiguous disk and making most efficient use of the CPU cache buffers, or to filter a column, within each page a bitset representing the rows can be used and each column can be scanned to work out the rows to materialize from the columnar encoding. Generally a map-reduce style pattern is used for the query, where there is a fan out in order to parallelize the querying of the pages, and a fan-in to combine the results back into a single result set.
+
+As such, the efficiency of such a database is really determined by the amount of data that needs to be scanned, and how contiguous the data being scanned is. Queries need to be constructed with this in mind, otherwise you can end up scanning all the data you have in your table.
+
+Columnar databases often are append-only: they do not support mutating old data. Or when they do, e.g. Redshift, the update process cannot be used in bulk due to its inefficiency at mutating the columnar data structures. For this reason, if you have a part of your integrated data where data may mutate often, or due to user input, it is recommended to use a relational database for that data, and export the mutable data out on some kind of schedule or event basis into immutable form. Careful consideration is needed here in design to ensure that it is understood that there may be some lag from the mutation of the data to that being mirrored into the 
+
+===== Data Warehouses
+
+Data Warehouses, such as AWS Redshift, are OLAP databases that are sharded, and each shard maintains its own slice of data. Again, with this model, the storage capacity is directly linked to each node, and has the previously discussed scaling issues.
+
+===== Data Lakes
+
+Data Lakes services, such as AWS Redshift Spectrum or Import.io Tables, are OLAP databases where the data is stored in files off-node. Modern columnar file formats such as Parquet are used to store the data in a columnar fashion. They use a massively-multiprocessing* model where the processing layer can be scaled depending on the size of the query based upon how many partitions are required and the size of those partitions. This overcomes the availity to independently scale the storage to the throughput. As such you can append data into your lake forever, and if you are only querying the last 30 days, your actual processing costs will not increase.
+
+=== Homogenisation strategy
+
+So, on balance, seems like the best option for general queries today is to use a Data Lake, like AWS Redshift Spectrum.
+
+Let us come back to what we need to standardise with this new information.
+
+.Homogenisation solution
+[options="header"]
+|======
+|Item|Solution
+|Access|SQL
+|Encoding|JSON => Parquet
+|Data Model|Relational with denormalization/nesting where sensible
+|Data Structure|Standardized on a per-project basis
+|Schema|Standardized on a per-project basis using JSON Schema
+|======
+
+WARNING: The one gotcha here is large integers, which are not natively supported by Javascript, and should be encoded as strings in the JSON. This is https://github.com/OAI/OpenAPI-Specification/issues/845[actively being worked upon].
+
+This gives us a full toolchain to be able to carry out our Web Data Integration, but does not solve the Data Engineering challenges.

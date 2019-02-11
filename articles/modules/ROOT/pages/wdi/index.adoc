@@ -1,0 +1,7 @@
+= Web Data Integration
+
+The Web is the largest repository of data in the known history of the universe.
+
+It is clear from the definition of Data Integration, that if you view the World Wide Web as a data source, or indeed as many different data sources, the ability to bring the data together from different parts of the web into a single datastore is an extension of the Data Integration problem. 
+
+Here the data is heteregenously available, and needs to be homogenised and consolidated in order to be leveraged.
