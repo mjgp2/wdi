@@ -8,7 +8,7 @@ It is, in effect, offering the fragmented data up as if it were a single databas
 
 == The scale of challenge
 
-Data integration is a hard problem, it is "AI Complete, meaning that completely automated solutions are unlikely. The reasons for this are three-fold:
+Data integration is a hard problem, it is "AI Complete", meaning that completely automated solutions are unlikely. The reasons for this are three-fold:
 
 1. System level: different platforms
 1. Logical: schema and data homogenity

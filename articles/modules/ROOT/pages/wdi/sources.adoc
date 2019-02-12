@@ -15,7 +15,7 @@ You can access a list of data catalogues at https://data.wu.ac.at/portalwatch[Po
 
 == Web Applications and Sites
 
-There are many web applications that publicly expose information, either through their HTML UI or HTTP APIs. This imformation might come in the form of:
+There are many web applications that publicly expose information, either through their HTML UI or HTTP APIs. This information might come in the form of:
 
 * Tables
 * Search results

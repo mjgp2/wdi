@@ -2,7 +2,7 @@
 
 The discipline of Web Data Integration (WDI) is an extension of https://en.wikipedia.org/wiki/Data_integration[Data Integration]. 
 
-Data Integration is the process of aggregating data from different sources into a homogenous view, includes data access, transformation, mapping, quality assurance and fusion of data from multiple sources. It is, in effect, offering the fragmented data up as if it were a single database for query.
+Data Integration is the process of aggregating data from different sources into a homogenous view, which includes data access, transformation, mapping, quality assurance and fusion of data from multiple sources. It is, in effect, offering the fragmented data up as if it were a single database for query.
 
 Web Data Integration extends and specialises Data Integration to see the Web as a collection of views of databases accessible over the Web protocols, including:
 
