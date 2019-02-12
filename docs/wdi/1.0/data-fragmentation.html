@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Fragmentation :: Web Data Integration</title>
+    <link rel="canonical" href="https://webdataintegration.info/wdi/1.0/data-fragmentation.html">
+    <meta name="generator" content="Antora 2.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://webdataintegration.info">Web Data Integration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="wdi" data-version="1.0">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Web Data Integration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="data-fragmentation.html">Data Fragmentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="data-integration.html">Data Integration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="wdi/index.html">Web Data Integration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wdi/sources.html">Sources of Web Data</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wdi/architecture.html">Data Integration Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="wdi/in-practice.html">In Practice</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="wdi/identity-resolution.html">Identity Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="wdi/data-fusion.html">Data Fusion</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Case Studies</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="wdi/case-study/knowledge-graphs.html">Knowledge Graphs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Web Data Integration</span>
+    <span class="version">1.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Web Data Integration</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">1.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Web Data Integration</a></li>
+    <li class="crumb"><a href="data-fragmentation.html">Data Fragmentation</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/mjgp2/wdi/edit/master/articles/modules/ROOT/pages/data-fragmentation.adoc">Edit this Page</a></div>
+</div>
+<article class="doc">
+<h1>Data Fragmentation</h1>
+<div class="paragraph">
+<p>Databases and the analytics tools that sit on top of them allow us to get answers to business questions based on a huge amount of data, which is hugely valuable. However, for this to be feasible there are three key assumptions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the data is all in a single schema;</p>
+</li>
+<li>
+<p>the data doesn&#8217;t contain duplicate records;</p>
+</li>
+<li>
+<p>the data is up to date and has no conflicts or quality issues.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In reality though, this is not often the case, and the data that needs to be analysed has to come from multiple sources where the databases have been created entirely independently, and there is little to no opportunity to homogenise these data sources for either technical or commercial reasons. In effect you have a collection of data silos.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/silos.png" alt="silos">
+</div>
+</div>
+<div class="paragraph">
+<p>These different data silos can:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>use different data models;</p>
+</li>
+<li>
+<p>use diferent schemas;</p>
+</li>
+<li>
+<p>describe the same entity;</p>
+</li>
+<li>
+<p>have conflicting data about the same entity;</p>
+</li>
+<li>
+<p>have different query interfaces and languages to access the data.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This happens across many industries. In banks it can be mainly internal data - both from having acquired other businesses, and from seperate IT initatives that created data silos. In Professional Services companies, it tended to be mostly external, needing to leverage many external data sources that are heterogeneous in a consistant way in order to do research.</p>
+</div>
+<div class="paragraph">
+<p>Data Integration attempts to find solutions to this real-world problem of silos and fragmentation.</p>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

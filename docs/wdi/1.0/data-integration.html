@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Integration :: Web Data Integration</title>
+    <link rel="canonical" href="https://webdataintegration.info/wdi/1.0/data-integration.html">
+    <meta name="generator" content="Antora 2.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://webdataintegration.info">Web Data Integration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="wdi" data-version="1.0">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Web Data Integration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="data-fragmentation.html">Data Fragmentation</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="data-integration.html">Data Integration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="wdi/index.html">Web Data Integration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wdi/sources.html">Sources of Web Data</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wdi/architecture.html">Data Integration Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="wdi/in-practice.html">In Practice</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="wdi/identity-resolution.html">Identity Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="wdi/data-fusion.html">Data Fusion</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Case Studies</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="wdi/case-study/knowledge-graphs.html">Knowledge Graphs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Web Data Integration</span>
+    <span class="version">1.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Web Data Integration</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">1.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Web Data Integration</a></li>
+    <li class="crumb"><a href="data-integration.html">Data Integration</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/mjgp2/wdi/edit/master/articles/modules/ROOT/pages/data-integration.adoc">Edit this Page</a></div>
+</div>
+<article class="doc">
+<h1>Data Integration</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>One definition that follows for data integration is that:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Data integration is the process of consolidating data from a set of heterogenous data sources into a homogenous data set or view on the data.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>It is, in effect, offering the fragmented data up as if it were a single database for query.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_scale_of_challenge"><a class="anchor" href="#_the_scale_of_challenge"></a>The scale of challenge</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Data integration is a hard problem, it is "AI Complete, meaning that completely automated solutions are unlikely. The reasons for this are three-fold:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>System level: different platforms</p>
+</li>
+<li>
+<p>Logical: schema and data homogenity</p>
+</li>
+<li>
+<p>Social: locating data, getting access to data</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>As it is AI Complete, we must aim for 2 goals:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Reduce the effort needed to set up an integration application.</p>
+</li>
+<li>
+<p>Enable the system to perform gracefully with uncertainty</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_solving_data_integration"><a class="anchor" href="#_solving_data_integration"></a>Solving data integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To break this out more, there are a number of properties that we want from the homogenous database:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>accurately and completly represent the content of all data sources;</p>
+</li>
+<li>
+<p>represent the entities using a single data model and schema;</p>
+</li>
+<li>
+<p>not contain duplicate records representing an entity (unless expected);</p>
+</li>
+<li>
+<p>resolve any conflicting data about entities.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In order to achieve this, data integration needs to be able to resolve the different types of heterogenity between different data sources.</p>
+</div>
+</div>
+</div>
+<h1 id="_data_source_heterogenity" class="sect0"><a class="anchor" href="#_data_source_heterogenity"></a>Data Source Heterogenity</h1>
+<div class="paragraph">
+<p>There are five different types of heterogenity that we need to solve for in the data:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Data Access</p>
+</li>
+<li>
+<p>Data Encoding</p>
+</li>
+<li>
+<p>Data Model</p>
+</li>
+<li>
+<p>Data Structure</p>
+</li>
+<li>
+<p>Data Semantics</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>As we will see, the application of standards in each of these areas can reduce or eliminate the heterogenity in these areas.</p>
+</div>
+<div class="sect1">
+<h2 id="_access_heterogenity"><a class="anchor" href="#_access_heterogenity"></a>Access Heterogenity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are many different layers to be being able to access data, and we must bridge these layers in order to consolidate our data.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Access Levels</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Level</th>
+<th class="tableblock halign-left valign-top">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Protocol</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP/REST, JDBC, SOAP</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Exchange Format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON, Protobuf, Parquet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">Query Language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full Languages, e.g. SQL
+Predefined; Canned queries, e.g. web forms/APIs,</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Canned queries, e.g. web forms/APIs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data dumps</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Restrictions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Thoughput, cost, rights</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Note that although databases may hae a full language to construct any desired query on the data, in reality pre-defined indexes may be required for such.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_encoding_heterogenity"><a class="anchor" href="#_encoding_heterogenity"></a>Encoding Heterogenity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is the difference in the encoding of the data and meta-data. This often does not apply when using some standardised access methods, such as JDBC, where any underlying differences in how the data is encoded is factored out by the access layer. You can see that it would apply however in data dumps, for example:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Encoding Examples</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Different binary encodings of character sets, e.g. UTF-8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Numbers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Different encoding of numbers, e.g. fixed length, varint, little vs big endian</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delimiter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which character is the C of CSV</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In practice, this is the easiest bridge to build between data sources due to there being good support for most different standards and charsets in most platforms and programming languages.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_model_heterogenity"><a class="anchor" href="#_data_model_heterogenity"></a>Data Model Heterogenity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is the difference in the type of Data Model that is used to represent data. This is importantly different from the schema, which describes how we model the attributes of entities, but rather this is how we model the entities themselves and the relationships between them.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Data Model Classes</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Class</th>
+<th class="tableblock halign-left valign-top">Relationships</th>
+<th class="tableblock halign-left valign-top">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relational</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Row-to-Row</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RDBMS, e.g. MySQL. Note that a "cell" can itself have hierarchical data stored within it, but the relationships are modelled from tow to row.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hierarchical</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nested data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML/JSON; Document Stores where the data is stored inline "nested" rather than normalized into multiple tables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object Oriented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inheritance, Object-to-Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object Oriented databases</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vertex-to-Vertex, Directed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RDF, Graph databases</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relational++</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Row-to-Row, Inheritance, Nested</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL: a "cell" can itself have hierarchical data stored within it, there exists table inheritance, but the relationships are modelled between rows</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_structural_heterogenity"><a class="anchor" href="#_structural_heterogenity"></a>Structural Heterogenity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Structural heterogenity is the difference in the data structures, such as tables, used to model the same data. This can include differences in:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Alternative modelling</p>
+</li>
+<li>
+<p>Normalization</p>
+</li>
+<li>
+<p>Nesting vs Foreign Key</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_alternative_modelling"><a class="anchor" href="#_alternative_modelling"></a>Alternative modelling</h3>
+<div class="paragraph">
+<p>Consider how you capture data for dogs and cats. Do you have a dogs table and a cats table? Do you have an animals table with an <code>species</code> column? Do you have an <code>is_cat</code> column if you know it&#8217;s only cats and dogs? There are many ways to model the same data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nomalization"><a class="anchor" href="#_nomalization"></a>Nomalization</h3>
+<div class="paragraph">
+<p>Normalization refers to the level of different tables you break things out to. For example, let&#8217;s say that each person has a list of hobbies. In a RDBMS you could have a person and a hobby table, and a join table to track who has what hobbies. Alternatively, you could just put the string values in a "hobbies" array within the person row. Or you could remove the join table and track a list of ids within the person row.</p>
+</div>
+<div class="paragraph">
+<p>Higher levels of normalization are generally thought to be "cleaner" representations of data, whereas you can get better real-world performance from some denormalization due to the disk/memory access required to fetch a person and their hobbies.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nesting_vs_foreign_key"><a class="anchor" href="#_nesting_vs_foreign_key"></a>Nesting vs Foreign Key</h3>
+<div class="paragraph">
+<p>Similar to normalization, this is a question of whether the data is stored in a normalized form, or nested within.</p>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s suppose you have people and their pets. Each pet only ever has one owner. In PostgreSQL you could either have a people and pet table, or alternatively you could have a <code>pets</code> column within the person table that stored a JSON blob that contained a list of pets, their names, ages, and so on.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_semantic_heterogenity"><a class="anchor" href="#_semantic_heterogenity"></a>Semantic Heterogenity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Semantic heterogenity is the differences in the meaning of the schema and data of the different data sources.</p>
+</div>
+<div class="sect2">
+<h3 id="_data_heterogenity"><a class="anchor" href="#_data_heterogenity"></a>Data heterogenity</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Data heterogenity</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Class</th>
+<th class="tableblock halign-left valign-top">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Numeric</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be power difference (e.g. GB vs MB), currency (e.g. USD vs GBP), or unit type (e.g. km vs miles)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Different representations in textual (e.g. Male vs M), or numeric (e.g. 2 &#8658; Manager) encodings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock">Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Synonyms (e.g. Street vs St.)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Homonyms (e.g. transliteration of Arabic)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spellings (e.g. color vs colour)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conceptual, e.g. same name but different meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date/Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implicit timezone</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_schematic_heterogenity"><a class="anchor" href="#_schematic_heterogenity"></a>Schematic heterogenity</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. Schematic heterogenity</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Class</th>
+<th class="tableblock halign-left valign-top">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute naming</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Synonyms across sources, e.g. Last Name vs Surname</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute composition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">e.g. Name vs First Name &amp; Last Name</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_object_identity"><a class="anchor" href="#_object_identity"></a>Object Identity</h3>
+<div class="paragraph">
+<p>The same item, e.g. product, is often represented in multiple data source, or sometimes even by multiple unlinked records within the same Data Source.</p>
+</div>
+<div class="paragraph">
+<p>The reason that we could have duplicates in a data sources could include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Human error, such as typos</p>
+</li>
+<li>
+<p>Lack of consistent global identifier (primary key)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_conflicts"><a class="anchor" href="#_data_conflicts"></a>Data conflicts</h3>
+<div class="paragraph">
+<p>Multiple data sources can have different values for the same entity attribute. This could be decause of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Errors</p>
+</li>
+<li>
+<p>Old data in one source</p>
+</li>
+<li>
+<p>Disagreement - one source actually thinks that the value is different</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In these cases there normally needs to be an automated way of deciding what the "source of truth" is for a given attribute.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

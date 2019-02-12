@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Data Integration Architecture :: Web Data Integration</title>
+    <link rel="canonical" href="https://webdataintegration.info/wdi/1.0/wdi/architecture.html">
+    <meta name="generator" content="Antora 2.0.0">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://webdataintegration.info">Web Data Integration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="wdi" data-version="1.0">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Web Data Integration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../data-fragmentation.html">Data Fragmentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../data-integration.html">Data Integration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="index.html">Web Data Integration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sources.html">Sources of Web Data</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="architecture.html">Data Integration Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="in-practice.html">In Practice</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="identity-resolution.html">Identity Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="data-fusion.html">Data Fusion</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Case Studies</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="case-study/knowledge-graphs.html">Knowledge Graphs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Web Data Integration</span>
+    <span class="version">1.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Web Data Integration</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Web Data Integration</a></li>
+    <li class="crumb"><a href="architecture.html">Data Integration Architecture</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/mjgp2/wdi/edit/master/articles/modules/ROOT/pages/wdi/architecture.adoc">Edit this Page</a></div>
+</div>
+<article class="doc">
+<h1>Web Data Integration Architecture</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are two extremes of integration model in Data Integration - Materialized where you consolidate the data into a database, and Virtual when you leave the data in its data stores, but provide a translation layer on top.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/material-virtual.png" alt="material virtual">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/material-virtual-2.png" alt="material virtual 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Therefore, when talking about web data, it really only makes sense to pull the data into a database, because the API access methods are so restrictive that you will not be able to carry out the analytics you require on the data. The Virtual architecture is really only useful if you cannot realistically pull all of the required data into the same place with an acceptable latency - for example, using the Bing web search API.</p>
+</div>
+<div class="paragraph">
+<p>So, now we know that we need a database to consolidate the data into, let&#8217;s look at some of our options.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_databases"><a class="anchor" href="#_databases"></a>Databases</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_rdf_stores"><a class="anchor" href="#_rdf_stores"></a>RDF stores</h3>
+<div class="paragraph">
+<p>RDF stores have incredibly low adoption in the wider technical community, and I could not recommend using one unless you have either the budget or the people to take MarkLogic to production, or you are happy to try to use Apache Jena.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/rdf-adoption.png" alt="rdf adoption">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_oltp_databases"><a class="anchor" href="#_oltp_databases"></a>OLTP Databases</h3>
+<div class="paragraph">
+<p>Relational OLTP databases organise the data on disk in rows. This makes it very efficient to be able to read and write the values generally in a single row, but it becomes much more expensive to be able to carry out analytics on a particular column. To overcome this, you can use covering indexes such that for a particular query only the data from the B-Tree index has to be read, which is much more efficient. However, this requires knowing all of the data access patterns up front, and also takes more space as the data is stored twice. This, you can imagine, is problematic for situations where the team who is creating the queries do not want to be having to wait for indexes to be created.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s for this reason that generally relational databases are not recommended for general analytical workloads.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_document_stores"><a class="anchor" href="#_document_stores"></a>Document stores</h3>
+<div class="paragraph">
+<p>Similarly document stores tend to have to parse the full object in JSON/BSON order to carry out analysis, unless the object is indexed. This has the same issues as relational databases for ad-doc analytical queries.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search_engines"><a class="anchor" href="#_search_engines"></a>Search engines</h3>
+<div class="paragraph">
+<p>The main example here is Lucene, and those engines that use it the build search clusters such as Elastic Search or Solr. These systems can give very good latency of results, but generally can be hard to scale the indexes up to support many entity types.</p>
+</div>
+<div class="paragraph">
+<p>With this model, the storage capacity is directly linked to each node in the cluster, as it the CPU and memory - that is, the CPU, memory and storage are all tightly coupled together. This makes indexes very difficult to scale, as you cannot elastically scale the throughput independently of the storage: you will need to physically add more disks to a node, or more RAM/CPUs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_olap_databases"><a class="anchor" href="#_olap_databases"></a>OLAP Databases</h3>
+<div class="paragraph">
+<p>OLAP databases are gnerally columnar databases or search indexes that tend to store the data in pages - groups of rows - on disk, where the pages are partitioned by some (composite) key, such that if, for example, you want to get all the events in a specific time window, the corresponding data pages to check can be located, hence reducing the amount of data to be scanned. Within each page, the data is stored in rows, and may be encoded in a way that makes the bytes that need to be scanned again decrease, e.g. a byte dictionary may be used for string enum values. Therefore in order to calculate an aggregate on a column, it is reading contiguous disk and making most efficient use of the CPU cache buffers, or to filter a column, within each page a bitset representing the rows can be used and each column can be scanned to work out the rows to materialize from the columnar encoding. Generally a map-reduce style pattern is used for the query, where there is a fan out in order to parallelize the querying of the pages, and a fan-in to combine the results back into a single result set.</p>
+</div>
+<div class="paragraph">
+<p>As such, the efficiency of such a database is really determined by the amount of data that needs to be scanned, and how contiguous the data being scanned is. Queries need to be constructed with this in mind, otherwise you can end up scanning all the data you have in your table.</p>
+</div>
+<div class="paragraph">
+<p>Columnar databases often are append-only: they do not support mutating old data. Or when they do, e.g. Redshift, the update process cannot be used in bulk due to its inefficiency at mutating the columnar data structures. For this reason, if you have a part of your integrated data where data may mutate often, or due to user input, it is recommended to use a relational database for that data, and export the mutable data out on some kind of schedule or event basis into immutable form. Careful consideration is needed here in design to ensure that it is understood that there may be some lag from the mutation of the data to that being mirrored into the</p>
+</div>
+<div class="sect3">
+<h4 id="_data_warehouses"><a class="anchor" href="#_data_warehouses"></a>Data Warehouses</h4>
+<div class="paragraph">
+<p>Data Warehouses, such as AWS Redshift, are OLAP databases that are sharded, and each shard maintains its own slice of data. Again, with this model, the storage capacity is directly linked to each node, and has the previously discussed scaling issues.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_data_lakes"><a class="anchor" href="#_data_lakes"></a>Data Lakes</h4>
+<div class="paragraph">
+<p>Data Lakes services, such as AWS Redshift Spectrum or Import.io Tables, are OLAP databases where the data is stored in files off-node. Modern columnar file formats such as Parquet are used to store the data in a columnar fashion. They use a massively-multiprocessing* model where the processing layer can be scaled depending on the size of the query based upon how many partitions are required and the size of those partitions. This overcomes the availity to independently scale the storage to the throughput. As such you can append data into your lake forever, and if you are only querying the last 30 days, your actual processing costs will not increase.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_homogenisation_strategy"><a class="anchor" href="#_homogenisation_strategy"></a>Homogenisation strategy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So, on balance, seems like the best option for general queries today is to use a Data Lake, like AWS Redshift Spectrum.</p>
+</div>
+<div class="paragraph">
+<p>Let us come back to what we need to standardise with this new information.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Homogenisation solution</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Access</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encoding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON &#8658; Parquet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relational with denormalization/nesting where sensible</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standardized on a per-project basis</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standardized on a per-project basis using JSON Schema</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The one gotcha here is large integers, which are not natively supported by Javascript, and should be encoded as strings in the JSON. This is <a href="https://github.com/OAI/OpenAPI-Specification/issues/845">actively being worked upon</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This gives us a full toolchain to be able to carry out our Web Data Integration, but does not solve the Data Engineering challenges.</p>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script src="../../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

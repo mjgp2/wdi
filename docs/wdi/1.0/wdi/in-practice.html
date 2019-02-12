@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDI In Practice :: Web Data Integration</title>
+    <link rel="canonical" href="https://webdataintegration.info/wdi/1.0/wdi/in-practice.html">
+    <meta name="generator" content="Antora 2.0.0">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://webdataintegration.info">Web Data Integration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="wdi" data-version="1.0">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Web Data Integration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../data-fragmentation.html">Data Fragmentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../data-integration.html">Data Integration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="index.html">Web Data Integration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sources.html">Sources of Web Data</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="architecture.html">Data Integration Architecture</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="in-practice.html">In Practice</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="identity-resolution.html">Identity Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="data-fusion.html">Data Fusion</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Case Studies</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="case-study/knowledge-graphs.html">Knowledge Graphs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Web Data Integration</span>
+    <span class="version">1.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Web Data Integration</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Web Data Integration</a></li>
+    <li class="crumb"><a href="in-practice.html">In Practice</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/mjgp2/wdi/edit/master/articles/modules/ROOT/pages/wdi/in-practice.adoc">Edit this Page</a></div>
+</div>
+<article class="doc">
+<h1>WDI In Practice</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s break down what a WDI project looks like in practice.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_problem_statement"><a class="anchor" href="#_problem_statement"></a>Problem statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Start off with a problem statement: what question(s) are you trying to answer using data? WDI is a business driven activity, there should be a clear value proposition from the project. Of course, you won&#8217;t know all the questions at the start, but you should try to define enough questions to validate that you are collecting the correct data.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_source_identification"><a class="anchor" href="#_data_source_identification"></a>Data source identification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You should now be able to determine where you want to get this data from, and how often. This is sometimes driven by business requirements (competitors), and sometimes by technical considerations.</p>
+</div>
+<div class="paragraph">
+<p>This step is also a sanity check for whether or not the data is available, and if it is going to be feasible to collect the data as desired.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_schema_definition"><a class="anchor" href="#_schema_definition"></a>Schema definition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You must now define the schema that you want to end up with. To do this, you need to write the JSON schema required, although personally I prefer to write it in YAML and then compile it to JSON, because:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>YAML is easier to read</p>
+</li>
+<li>
+<p>YAML is easier to write</p>
+</li>
+<li>
+<p>YAML can be commented</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You should only use a subset of JSON Schema - you only want database friendly types, so no polymorphism! Think of the JSON schema as really representing nested tables. As such it is important to be able to identify a primary key that you can use for the data, be that a URL, a SKU, or otherwise.</p>
+</div>
+<div class="paragraph">
+<p>The schema should really be driven from the business problem you are trying to collect data to answer, but potentially with an eye on what the next question might be. It&#8217;s not possible to go back and collect histroic data, so it&#8217;s better to try to get the coverage of data you think you will need for the project. It is a bit waterfall by necessity, however you can still be lean and go back and add and change fields. However once you start collecting data the cost of change becomes much higher.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_query_definition"><a class="anchor" href="#_query_definition"></a>Query definition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now you have your schema defined, you should be able to write down the SQL queries you would execute in order to get the answers you want. This really is a validation exercise to check that the schema is correct, and once you start pressing forward you will be able to answer the questions with the data you have.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_source_mapping"><a class="anchor" href="#_data_source_mapping"></a>Data source mapping</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now you have the data sources and the schema, you should be able to map the schema to the data points to the data sources, ready for the Data Engineering. This really is the "specification" step of the software development lifecycle (SDLC) of Data Engineering.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_engineering"><a class="anchor" href="#_data_engineering"></a>Data engineering</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Data engineering is the process of creating the code or configuration to fetch the web resources, and transform them into JSON adhering to the schema required.</p>
+</div>
+<div class="paragraph">
+<p>The output of this step is newline-delimited JSON ("ND-JSON").</p>
+</div>
+<div class="sect2">
+<h3 id="_data_transformation"><a class="anchor" href="#_data_transformation"></a>Data transformation</h3>
+<div class="paragraph">
+<p>As part of the data engineering, any transformations that are necessary to make the data fit into the desired schema must be carried out; for example, this may include currency normalization, case normalization, date parsing, field splitting (<code>name &#8658; first_name, last_name</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_audit_trail"><a class="anchor" href="#_audit_trail"></a>Audit trail</h3>
+<div class="paragraph">
+<p>It is often the case that we want to keep an audit log of where the data came from for traceability reasons. These may include raw files, e.g. HTML, as well as screenshots from Web Applications.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_quality_checking"><a class="anchor" href="#_data_quality_checking"></a>Data quality checking</h3>
+<div class="paragraph">
+<p>An integral part of Data Engineering is Data Quality checking, which should ideally be happening progressively as the data is collected, so as to raise an issue to ops, and then fail fast if there is an issue that needs correcting. If this is not possible, it can be checked at the end, but if there are issues with certain data, the data may need to be re-fetched. For this reason it is best to keep the raw data file, e.g. HTML, such that if possible data can be re-extracted without</p>
+</div>
+<div class="sect3">
+<h4 id="_schema_validation"><a class="anchor" href="#_schema_validation"></a>Schema validation</h4>
+<div class="paragraph">
+<p>The data can be validated against the schema as it is collected. The JSON Schema can contain rules for what the data should be, e.g. min/max values, regular expressions, etc. Later, values in the Data lake conversion process will blanked if they do not conform to the schema, so this can give an example of data loss.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_model_based_validation"><a class="anchor" href="#_model_based_validation"></a>Model-based validation</h4>
+<div class="paragraph">
+<p>The data can also be validated against a machine learning model to see if it has the same "shape" as previous, known-valid data. Data that is incorrectly flagged can be used for further training of the model.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_import"><a class="anchor" href="#_data_import"></a>Data import</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Data can then be canverted into parquet file(s) and stored in the data lake in the correct partition(s). These file(s) should have predictable fienames so that if they need to be deleted or replaced in future they can be.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_analysis_visualization_and_alerting"><a class="anchor" href="#_data_analysis_visualization_and_alerting"></a>Data analysis, visualization and alerting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once the data is stored, then the queries can be run against it, dashboards created, and alerts set up to notify you of certain conditions occuring.</p>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script src="../../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>
