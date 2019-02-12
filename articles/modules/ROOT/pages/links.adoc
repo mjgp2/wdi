@@ -1,0 +1,26 @@
+= Links
+
+== White Papers
+
+* http://www.opimas.com/research/355/detail/[The Web Data Extraction Market - Opimas]
+* https://www.import.io/wp-content/uploads/2019/02/Import.io-Web-Data-Integration.pdf[Web Data Integration: A new source of competitive advantage - Ovum]
+* https://www.import.io/wp-content/uploads/2018/05/Maximizing-Value-Web-Data.pdf[Maximizing the Value of Web Data]
+
+== University Courses and Departments
+
+* https://www.uni-mannheim.de/dws/teaching/course-details/courses-for-master-candidates/ie-670-web-data-integration/#c101837[Web Data Integration (HWS2018) - University of Mannheim]
+* https://dbs.uni-leipzig.de/en/projekte/DATAINT/index.html[Web Data Integration - Database Group Leipzig]
+* http://idke.ruc.edu.cn/projects/web.htm[Lab of Web and Mobile Data management, Renmin University of China]
+
+== Published Papers
+
+* https://link.springer.com/chapter/10.1007/978-3-540-79396-0_36[Web Data Integration System: Approach and Case Study]
+* https://link.springer.com/search?query=%22Web+Data+Integration%22&facet-content-type=%22ConferencePaper%22[Springer Link]
+
+== Web Data Integration Providers
+
+* https://import.io[import.io - Web Data Integration Provider]
+
+== Web Data Integration Frameworks
+
+* https://github.com/olehmberg/winter[Web Data INTEgRation Framework (WInte.r)]

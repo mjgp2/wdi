@@ -9,3 +9,4 @@
 *** xref:wdi/data-fusion.adoc[Data Fusion]
 ** Case Studies
 *** xref:wdi/case-study/knowledge-graphs.adoc[Knowledge Graphs]
+* xref:links.adoc[Links]

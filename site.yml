@@ -9,7 +9,7 @@ content:
     start_path: articles
 ui:
   bundle:
-    url: https://github.com/mjgp2/antora-theme/releases/download/0.1/ui-bundle.zip
+    url: https://github.com/mjgp2/antora-theme/releases/download/0.1/ui-bundle.zip?v=1
     snapshot: true
 output:
   dir: ./docs
