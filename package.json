@@ -2,7 +2,6 @@
   "name": "wdi",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "antora --stacktrace --cache-dir .cache site.yml && touch docs/.nojekyll",
     "serve": "serve docs"
